@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Results</title>
+    <style>
+        .button {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+            /* padding: 16px 32px; */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 26px;
+            font-family: serif;
+            /* margin: 4px 2px; */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+
+        .button:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
+    <script>
+        function register() {
+            if (localStorage) {
+                var y = localStorage.getItem("id");
+                var x = localStorage.getItem("name");
+                var z = localStorage.getItem("score");
+                var t = localStorage.getItem("totalques");
+                var u = localStorage.getItem("unattempted");
+                var tot = Number(t);
+                var d = Number(z);
+                var un = Number(u);
+                var wrong = tot - d - u;
+                var per = (d / tot) * 100;
+                var myTable =
+                    '<div class="container">' +
+                    '<div class="row">' +
+                    '<div class="col-sm-3"></div>' +
+                    '<div class="col-sm-6">' +
+                    '<center>' +
+                    '<table class="table border border-dark border-4 table-bordered">' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>ID: </b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + y + '</b></font></td>' +
+                    '</tr>' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>Total Questions</b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + tot + '</b></font></td>' +
+                    '</tr>' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>Correct</b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + d + '</b></font></td>' +
+                    '</tr>' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>Not Attempted</b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + u + '</b></font></td>' +
+                    '</tr>' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>Wrong</b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + wrong + '</b></font></td>' +
+                    '</tr>' +
+                    '<tr bgcolor= #E5FCE3>' +
+                    '<td align="center"><font face="helvetica"><b>Percentage</b></font></td>' +
+                    '<td align="center"><font face="helvetica"><b>' + per + '%</b></font></td>' +
+                    '</tr>' +
+                    '</table>' +
+                    '</center>' + '</div>' + '<div class="col-sm-3"></div>' + '</div>' + '</div>';
+                document.writeln("<h1><center>RESULTS</center><h1>")
+                document.writeln(myTable);
+                document.writeln('<center><a class="button" href="report.html" role="button"><b>View Detailed Report</b></a></center>')
+            }
+        }
+        register();
+
+        
+
+    </script>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

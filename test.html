@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <title>Quiz</title>
     <style>
         #count {
@@ -12,20 +14,21 @@
             border: #5AB029 3px solid;
             /* padding: 10px 40px 40px 40px; */
             background-color: #E5FCE3;
-            width: 25%;
-            margin-left: 37.5%;
+            /* width: 25%;
+            margin-left: 37.5%; */
             font-family: serif;
             font-size: 30px;
             text-align: center;
         }
+
         #test {
             /* align-items: center;
             text-align: center; */
             border: #5AB029 3px solid;
-            padding: 10px 40px 40px 40px;
+            /* padding: 10px 40px 40px 40px; */
             background-color: #E5FCE3;
-            width: 50%;
-            margin-left: 25%;
+            /* width: 50%;
+            margin-left: 25%; */
             font-family: serif;
             font-size: 30px;
         }
@@ -34,8 +37,8 @@
             /* border: #5AB029 3px solid; */
             /* padding: 10px 40px 40px 40px; */
             /* background-color: #E5FCE3; */
-            width: 50%;
-            margin-left: 25%;
+            /* width: 50%;
+            margin-left: 25%; */
             font-family: serif;
             font-size: 30px;
             text-align: center;
@@ -45,13 +48,13 @@
             background-color: white;
             color: black;
             border: 2px solid #008CBA;
-            padding: 16px 32px;
+            /* padding: 16px 32px; */
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 26px;
             font-family: serif;
-            margin: 4px 2px;
+            /* margin: 4px 2px; */
             transition-duration: 0.4s;
             cursor: pointer;
         }
@@ -67,11 +70,13 @@
         var score = 0;
         // pos is position of where the user in the test or which question they're up to
         var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0, notatt = 0;
+        
         // this is a multidimensional array with 4 inner array elements with 5 elements inside them
         var questions = null;
         var ourRequest = new XMLHttpRequest();
-        ourRequest.open('GET','https://raw.githubusercontent.com/sricharan22/htmlques/master/questions.json');
-        ourRequest.onload = function(){
+        var testlink = 'https://raw.githubusercontent.com/sricharan22/htmlques/master/questions.json';
+        ourRequest.open('GET', testlink);
+        ourRequest.onload = function () {
             questions = JSON.parse(ourRequest.responseText);
             console.log(questions[0]);
         };
@@ -83,16 +88,17 @@
         // this function renders a question for display on the page
         var count = 15;
         var interval = setInterval(function () {
-            document.getElementById('count').innerHTML = "Time Remaining:"+count;
+            document.getElementById('count').innerHTML = "Time Remaining:" + count;
             count--;
             if (count === 0) {
                 // clearInterval(interval);
                 // document.getElementById('count').innerHTML = 'Done';
                 // or...
                 alert("You're out of time! \n Move to next question");
-                notatt ++;
+                localStorage.setItem(pos,"NOT SELECTED");
+                notatt++;
                 count = 15;
-                pos ++;
+                pos++;
                 renderQuestion();
             }
         }, 1000);
@@ -106,7 +112,7 @@
                 clearInterval(interval);
                 document.getElementById('count').innerHTML = 'Done';
                 get("test_status").innerHTML = "Test completed";
-                test.innerHTML = '<center><a class="button" href="quiz.html" role="button"><b>View Results</b></a></center>';
+                test.innerHTML = '<center><a class="button" href="results.html" role="button"><b>View Results</b></a></center>';
                 // test.innerHTML = "<center><button type='submit'> <a href='quiz.html'>view results</a></button></center>";
                 // resets the variable to allow users to restart the test
                 pos = 0;
@@ -146,6 +152,10 @@
                     correct++;
                 }
                 // changes position of which character user is on
+                if (localStorage) {
+                    localStorage.setItem(pos,choice);
+                    // alert(localStorage.getItem(pos));
+                }
                 pos++;
                 // clearInterval(interval);
                 count = 15;
@@ -174,9 +184,21 @@
 </head>
 
 <body>
-    <h2 id="test_status"></h2>
-    <h2 id="count"></h2>
-    <div id="test"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2 id="test_status"></h2>
+                <h2 id="count"></h2>
+                <div id="test"></div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
